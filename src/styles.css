@@ -1,0 +1,150 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * PLACEMENT INTELLIGENCE — design system
+ * Terminal / component-library aesthetic: near-black canvas, hairline borders,
+ * monospace typography, one electric-cyan action colour.
+ * All colours are oklch tokens. Never hardcode colours in components.
+ */
+
+@theme inline {
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "JetBrains Mono", ui-monospace, monospace;
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-signal-red: var(--signal-red);
+  --color-signal-yellow: var(--signal-yellow);
+  --color-signal-green: var(--signal-green);
+  --color-signal-violet: var(--signal-violet);
+  --color-chart-1: var(--signal-green);
+  --color-chart-2: var(--primary);
+  --color-chart-3: var(--signal-yellow);
+  --color-chart-4: var(--signal-violet);
+  --color-chart-5: var(--signal-red);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--primary);
+  --color-sidebar-primary-foreground: var(--primary-foreground);
+  --color-sidebar-accent: var(--surface-2);
+  --color-sidebar-accent-foreground: var(--foreground);
+  --color-sidebar-border: var(--border);
+  --color-sidebar-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.25rem;
+  --background: oklch(0.16 0.003 260);
+  --foreground: oklch(0.93 0.004 260);
+  --surface: oklch(0.19 0.003 260);
+  --surface-2: oklch(0.23 0.004 260);
+  --card: oklch(0.185 0.003 260);
+  --card-foreground: oklch(0.93 0.004 260);
+  --popover: oklch(0.19 0.003 260);
+  --popover-foreground: oklch(0.93 0.004 260);
+  --primary: oklch(0.86 0.13 200);
+  --primary-foreground: oklch(0.17 0.02 240);
+  --secondary: oklch(0.24 0.004 260);
+  --secondary-foreground: oklch(0.9 0.004 260);
+  --muted: oklch(0.22 0.003 260);
+  --muted-foreground: oklch(0.62 0.006 260);
+  --accent: oklch(0.26 0.005 260);
+  --accent-foreground: oklch(0.95 0.004 260);
+  --destructive: oklch(0.62 0.2 22);
+  --destructive-foreground: oklch(0.97 0.005 260);
+  --border: oklch(0.28 0.004 260);
+  --border-strong: oklch(0.36 0.005 260);
+  --input: oklch(0.26 0.004 260);
+  --ring: oklch(0.86 0.13 200);
+  --signal-red: oklch(0.65 0.19 18);
+  --signal-yellow: oklch(0.85 0.16 95);
+  --signal-green: oklch(0.79 0.19 145);
+  --signal-violet: oklch(0.65 0.2 285);
+  --sidebar: oklch(0.145 0.003 260);
+  --sidebar-foreground: oklch(0.88 0.004 260);
+}
+
+.dark {
+  --background: oklch(0.16 0.003 260);
+  --foreground: oklch(0.93 0.004 260);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    font-family: var(--font-mono);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+  }
+}
+
+@utility label-xs {
+  font-size: 0.625rem;
+  line-height: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+@utility panel {
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+
+@utility grid-noise {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--border) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--border) 55%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
