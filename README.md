@@ -38,31 +38,4 @@ Visit `http://localhost:5173` in your browser.
 
 ---
 
-## 🌐 Deploy to Production
-
-### Deploy on Vercel (Recommended)
-1. Import the repository on [Vercel](https://vercel.com/new).
-2. Set Framework Preset to **Vite**.
-3. Add Environment Variables:
-   - `VITE_SUPABASE_URL`: `https://krbuwddkfzkzbxcembgu.supabase.co`
-   - `VITE_SUPABASE_PUBLISHABLE_KEY`: `sb_publishable_erDDCX5eSSk3j8k9zEIk4g_Oy832OJD`
-4. Click **Deploy**.
-
-### Deploy on Netlify
-1. Connect repository on [Netlify](https://app.netlify.com/).
-2. Build command: `npm run build`
-3. Publish directory: `dist`
-4. Add the environment variables from `.env.example`.
-5. Click **Deploy Site**.
-
-### Deploy on Cloudflare Pages
-1. Create a project in [Cloudflare Pages](https://pages.cloudflare.com/).
-2. Framework preset: **Vite**
-3. Build command: `npm run build`
-4. Output directory: `dist`
-
----
-
-## 📜 License
-
 MIT License. Designed for students preparing for campus, off-campus, and software engineering placements.
