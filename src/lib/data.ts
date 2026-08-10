@@ -305,51 +305,10 @@ export async function fetchCompanyDrives(companyId: string) {
     if (!error && data && data.length > 0) return data;
   }
 
-  // Authentic drives mapping based on actual company tier
-  const { slug, name } = getCompanyByAnyIdentifier(companyId);
-
-  // Top tier product companies that DO NOT hold on-campus drives at BBD
-  const isTier1Product = [
-    "google", "apple", "microsoft", "meta", "netflix", "uber", "atlassian", 
-    "adobe", "salesforce", "goldman-sachs", "de-shaw", "stripe", "airbnb", 
-    "nvidia", "palantir", "databricks", "snowflake"
-  ].includes(slug);
-
-  const colleges = isTier1Product
-    ? [
-        { name: "IIT Bombay", slug: "iit-bombay" },
-        { name: "IIT Delhi", slug: "iit-delhi" },
-        { name: "IIIT Hyderabad", slug: "iiit-hyderabad" },
-        { name: "NIT Trichy", slug: "nit-trichy" },
-        { name: "BITS Pilani", slug: "bits-pilani" },
-      ]
-    : [
-        { name: "Babu Banarasi Das University", slug: "bbd-lucknow" },
-        { name: "BBDNITM Lucknow", slug: "bbdnitm-lucknow" },
-        { name: "AKTU Pool Campus (Lucknow)", slug: "aktu-lucknow" },
-        { name: "VIT Vellore", slug: "vit-vellore" },
-        { name: "SRM Institute of Science and Tech", slug: "srm-chennai" },
-      ];
-
-  const roles = isTier1Product
-    ? ["Software Engineer", "SDE-1", "Systems Engineer", "ML Engineer", "Product Engineer"]
-    : ["System Engineer", "Associate Software Engineer", "Project Engineer", "Programmer Analyst", "Analyst"];
-
-  const lpaBase = isTier1Product
-    ? (slug.includes("apple") || slug.includes("google") ? 33.5 : slug.includes("amazon") ? 28.0 : 24.0)
-    : (slug.includes("tcs") || slug.includes("infosys") || slug.includes("wipro") || slug.includes("cognizant") || slug.includes("hcl") ? 3.6 : 6.0);
-
-  return [2026, 2025].flatMap((yr, yi) =>
-    colleges.slice(0, 3).map((col, ci) => ({
-      id: `drive-${slug}-${yr}-${ci}`,
-      year: yr,
-      role: roles[(yi + ci) % roles.length],
-      package_lpa: (lpaBase + (yi + ci) * 0.8).toFixed(1),
-      verification: "verified",
-      companies: { name, slug },
-      colleges: { name: col.name, slug: col.slug },
-    }))
-  );
+  // Pure Authentic Data: Only return drives if explicitly recorded for this company (never synthesize fake colleges)
+  const { slug } = getCompanyByAnyIdentifier(companyId);
+  const bbdDrives = await fetchBBDData();
+  return bbdDrives.filter((d: any) => d.companies?.slug === slug);
 }
 
 // ────── BBD Campus Data ──────
