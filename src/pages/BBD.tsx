@@ -12,8 +12,9 @@ export default function BBDPage() {
   // Aggregate stats
   const uniqueCompanies = new Set(drives?.map((d: any) => d.companies?.slug).filter(Boolean));
   const years = [...new Set(drives?.map((d: any) => d.year).filter(Boolean))].sort((a, b) => b - a);
-  const avgPackage = drives?.length
-    ? (drives.reduce((s: number, d: any) => s + (Number(d.package_lpa) || 0), 0) / drives.length).toFixed(1)
+  const validPackages = drives?.map((d: any) => parseFloat(String(d.package_lpa))).filter((v: number) => !isNaN(v)) ?? [];
+  const avgPackage = validPackages.length
+    ? (validPackages.reduce((s: number, v: number) => s + v, 0) / validPackages.length).toFixed(1)
     : "—";
 
   return (
@@ -69,7 +70,7 @@ export default function BBDPage() {
                     <td className="px-3 py-2 text-muted-foreground">{d.colleges?.short_name ?? d.colleges?.name ?? "BBD Lucknow"}</td>
                     <td className="px-3 py-2 text-foreground">{d.role ?? "—"}</td>
                     <td className="px-3 py-2 font-bold text-signal-green tabular-nums">
-                      {d.package_lpa ? `₹${Number(d.package_lpa).toFixed(1)} LPA` : "—"}
+                      {d.package_lpa ? (typeof d.package_lpa === "number" ? `₹${d.package_lpa.toFixed(1)} LPA` : `₹${d.package_lpa} LPA`) : "—"}
                     </td>
                     <td className="px-3 py-2">
                       <span className="border border-signal-green/40 bg-signal-green/10 px-1.5 py-0.5 text-[10px] uppercase text-signal-green">

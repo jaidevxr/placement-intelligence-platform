@@ -97,6 +97,7 @@ export function QuestionList({ base }: { base: Filters }) {
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
   const [difficulty, setDifficulty] = useState("");
+  const [companySlug, setCompanySlug] = useState(base.companySlug ?? "");
   const [year, setYear] = useState("");
   const [topic, setTopic] = useState(base.topic ?? "");
 
@@ -105,6 +106,7 @@ export function QuestionList({ base }: { base: Filters }) {
     page,
     search: search || undefined,
     difficulty: difficulty || undefined,
+    companySlug: companySlug || base.companySlug || undefined,
     year: year ? Number(year) : base.year,
     topic: topic || base.topic || undefined,
   };
@@ -130,6 +132,26 @@ export function QuestionList({ base }: { base: Filters }) {
           placeholder="Search questions…"
           className="min-w-56 flex-1 border border-border bg-surface px-3 py-2 text-sm outline-none placeholder:text-muted-foreground focus:border-primary"
         />
+        <select
+          value={companySlug}
+          onChange={(e) => { setPage(0); setCompanySlug(e.target.value); }}
+          className="border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary"
+        >
+          <option value="">ALL COMPANIES</option>
+          <option value="tcs">TCS NQT</option>
+          <option value="infosys">INFOSYS</option>
+          <option value="wipro">WIPRO NLTH</option>
+          <option value="accenture">ACCENTURE</option>
+          <option value="cognizant">COGNIZANT</option>
+          <option value="capgemini">CAPGEMINI</option>
+          <option value="deloitte">DELOITTE NLA</option>
+          <option value="hcl">HCLTECH</option>
+          <option value="persistent-systems">PERSISTENT</option>
+          <option value="tech-mahindra">TECH MAHINDRA</option>
+          <option value="google">GOOGLE</option>
+          <option value="amazon">AMAZON</option>
+          <option value="microsoft">MICROSOFT</option>
+        </select>
         <select
           value={difficulty}
           onChange={(e) => { setPage(0); setDifficulty(e.target.value); }}
