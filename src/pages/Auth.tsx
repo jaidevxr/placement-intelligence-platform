@@ -37,11 +37,17 @@ export default function AuthPage() {
   }
 
   async function googleSignIn() {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: { redirectTo: window.location.origin },
-    });
-    if (error) setMsg("Google sign-in failed. Try again.");
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: window.location.origin },
+      });
+      if (error) {
+        setMsg("Google OAuth Client Secret is missing in Supabase Console (Auth -> Providers -> Google). Please sign in using Email & Password.");
+      }
+    } catch {
+      setMsg("Google OAuth is not configured in Supabase. Please sign in using Email & Password.");
+    }
   }
 
   const field = "w-full border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary";
