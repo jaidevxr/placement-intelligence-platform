@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0d14"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </linearGradient>
+    <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe"/>
+      <stop offset="100%" stop-color="#4facfe"/>
+    </linearGradient>
+    <linearGradient id="spark-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Card -->
+  <rect width="512" height="512" rx="128" fill="url(#bg-grad)"/>
+  <rect width="504" height="504" x="4" y="4" rx="124" fill="none" stroke="#1e293b" stroke-width="8"/>
+  <rect width="500" height="500" x="6" y="6" rx="122" fill="none" stroke="url(#accent-grad)" stroke-width="3" stroke-opacity="0.4"/>
+
+  <!-- Code Bracket / Terminal Prompt Icon -->
+  <g transform="translate(10, 10)">
+    <!-- Terminal header dots -->
+    <circle cx="100" cy="90" r="14" fill="#ef4444" opacity="0.8"/>
+    <circle cx="140" cy="90" r="14" fill="#eab308" opacity="0.8"/>
+    <circle cx="180" cy="90" r="14" fill="#22c55e" opacity="0.8"/>
+
+    <!-- P + Terminal > Spark Logo -->
+    <!-- Stylized P symbol with Terminal Angle -->
+    <path d="M 140 190 V 390 M 140 190 H 260 C 330 190 330 290 260 290 H 140" 
+          fill="none" stroke="url(#accent-grad)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+          
+    <!-- Pulse / Analytics trend line representing Intelligence -->
+    <path d="M 270 390 L 320 330 L 360 360 L 410 280" 
+          fill="none" stroke="url(#spark-grad)" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+
+    <!-- Intelligence Spark Dot -->
+    <circle cx="410" cy="280" r="22" fill="#00f2fe" filter="url(#glow)"/>
+  </g>
+</svg>
